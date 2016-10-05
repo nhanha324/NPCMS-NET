@@ -1,0 +1,40 @@
+﻿﻿<ul>
+    <li ng-repeat="message in controller.validationMessages">
+        {{message}}
+    </li>
+</ul>
+
+<fieldset>
+
+    <div>
+        <h3>List of Users</h3>
+
+        Need create a new User? <a ng-click="controller.goAddUser()" class="btn-primary btn btn-sm"><span class="glyphicon glyphicon-plus"></span> New</a>
+    </div>
+
+    <hr />
+
+    <form class="form-group">
+        <div class="inner-addon left-addon">
+            <i class="glyphicon glyphicon-search"> <input type="search" class="form-control" ng-model="searchText" ng-model-options="{debounce:1000}" placeholder="Search" /></i>
+
+        </div>
+
+        <table class="table table-striped table-hover table-responsive">
+            <thead>
+
+                <tr>
+                    <th>UserName</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="usr in controller.registredUsers |filter:{userName:searchText}|orderBy:'userName'">
+                <td>{{usr.userName}}</td>
+                <td>
+                    <a ng-click="controller.goEditUser(usr.id)" class="btn btn-xs btn-success"> <span class="glyphicon glyphicon-pencil"></span></a>
+                    <a ng-click="controller.goDeleteUser(usr.id)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</fieldset>

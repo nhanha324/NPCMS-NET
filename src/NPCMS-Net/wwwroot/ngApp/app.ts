@@ -13,10 +13,52 @@ namespace NPCMS_Net {
                 controller: NPCMS_Net.Controllers.HomeController,
                 controllerAs: 'controller'
             })
-            .state('secret', {
-                url: '/secret',
-                templateUrl: '/ngApp/views/secret.html',
-                controller: NPCMS_Net.Controllers.SecretController,
+            .state('pages', {
+                url: '/admin/pages',
+                templateUrl: '/ngApp/views/page.html',
+                controller: NPCMS_Net.Controllers.PageController,
+                controllerAs: 'controller'
+            })
+            .state('layouts', {
+                url: '/admin/pages/layouts',
+                templateUrl: '/ngApp/views/layout.html',
+                controller: NPCMS_Net.Controllers.LayoutController,
+                controllerAs: 'controller'
+            })
+            .state('things', {
+                url: '/admin/things',
+                templateUrl: '/ngApp/views/thing.html',
+                controller: NPCMS_Net.Controllers.ThingController,
+                controllerAs: 'controller'
+            })
+            .state('users', {
+                url: '/admin/users',
+                templateUrl: '/ngApp/views/User/user.html',
+                controller: NPCMS_Net.Controllers.RegisterController,
+                controllerAs: 'controller'
+            })
+            .state('adduser', {
+                url: '/admin/users/adduser',
+                templateUrl: '/ngApp/views/User/adduser.html',
+                controller: NPCMS_Net.Controllers.RegisterController,
+                controllerAs: 'controller'
+            })
+            .state('edituser', {
+                url: '/admin/users/edituser',
+                templateUrl: '/ngApp/views/User/edituser.html',
+                controller: NPCMS_Net.Controllers.RegisterController,
+                controllerAs: 'controller'
+            })
+            .state('roles', {
+                url: '/admin/users/roles',
+                templateUrl: '/ngApp/views/role.html',
+                controller: NPCMS_Net.Controllers.RoleController,
+                controllerAs: 'controller'
+            })
+            .state('extensions', {
+                url: '/admin/extensions',
+                templateUrl: '/ngApp/views/extension.html',
+                controller: NPCMS_Net.Controllers.ExtensionController,
                 controllerAs: 'controller'
             })
             .state('login', {
@@ -29,18 +71,6 @@ namespace NPCMS_Net {
                 url: '/register',
                 templateUrl: '/ngApp/views/register.html',
                 controller: NPCMS_Net.Controllers.RegisterController,
-                controllerAs: 'controller'
-            })
-            .state('externalRegister', {
-                url: '/externalRegister',
-                templateUrl: '/ngApp/views/externalRegister.html',
-                controller: NPCMS_Net.Controllers.ExternalRegisterController,
-                controllerAs: 'controller'
-            }) 
-            .state('about', {
-                url: '/about',
-                templateUrl: '/ngApp/views/about.html',
-                controller: NPCMS_Net.Controllers.AboutController,
                 controllerAs: 'controller'
             })
             .state('notFound', {

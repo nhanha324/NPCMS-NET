@@ -1,0 +1,33 @@
+﻿﻿<h1>Users</h1>
+<fieldset>
+    <legend>Editing User</legend>
+    <ul>
+        <li ng-repeat="message in controller.validationMessages">
+            {{message}}
+        </li>
+    </ul>
+    <form name="userForm" class="form-horizontal" ng-submit="controller.register()">
+
+        <div class="form-group">
+            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+            <div class="col-lg-10">
+                <input name="email" type="text" ng-model="controller.registerUser.email"
+                       class="form-control" id="inputEmail" placeholder="Email" required
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                <span ng-show="userForm.email.$touched && userForm.email.$error.required" class="error">
+                    Email is required.
+                </span>
+                <span ng-show="userForm.email.$touched && userForm.email.$error.pattern" class="error">
+                    Email must be a valid email format, ex. yo@coder.com
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" ng-click="controller.clearForm()" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</fieldset>

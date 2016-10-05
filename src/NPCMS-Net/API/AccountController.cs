@@ -456,6 +456,59 @@ namespace NPCMS_Net.Controllers
             }
         }
 
+        //Part of Solution Issue #3 - NPCMS 10/03/2016
+        // GET: /Account/GetAllUsers
+        [HttpGet("GetAllUsers")]
+        [AllowAnonymous]
+        public IEnumerable<ApplicationUser> GetAllUsers()
+        {
+            return _userManager.Users.ToList();
+        }
+
+        //Part of Solution Issue #3 - NPCMS 10/04/2016
+        // GET: /Account/GetUser
+        [HttpGet("GetUserById/{userId}")]
+        [AllowAnonymous]
+        public ApplicationUser GetUserById(string userId)
+        {
+
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+
+            return user;
+
+        }
+
+
+        // POST: /Account/Register
+         [HttpDelete("DeleteUser")]
+         [AllowAnonymous]
+         public async Task<IActionResult> DeleteUser([FromBody]ApplicationUser usertodelete)
+         {
+             if (ModelState.IsValid)
+             {
+                 var user = await GetUser(usertodelete.UserName);
+
+                 if (user == null)
+                 {
+
+                     this.ModelState.AddModelError(null, "User do not exists");
+                     return BadRequest(this.ModelState);
+                 }
+
+                 var result = await _userManager.DeleteAsync(usertodelete);
+                 if (result.Succeeded)
+                 {
+                     return Ok(usertodelete);
+                 }
+                 AddErrors(result);
+             } 
+
+             // If we got this far, something failed
+             return BadRequest(this.ModelState);
+         }
+         
+
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)

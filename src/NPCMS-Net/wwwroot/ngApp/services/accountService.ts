@@ -135,6 +135,46 @@ namespace NPCMS_Net.Services {
             return messages;
         }
 
+
+        public deleteUser(usertodelete) {
+            return this.$q((resolve, reject) => {
+                this.$http.delete('/api/account/deleteuser', usertodelete)
+                    .then((result) => {
+                        resolve(result);
+                    })
+                    .catch((result) => {
+                        var messages = this.flattenValidation(result.data);
+                        reject(messages);
+                    });
+            });
+        }
+
+
+        public getAllUsers() {
+            return this.$q((resolve, reject) => {
+                this.$http.get('/api/account/getallusers', null)
+                    .then((result) => {
+                        resolve(result.data);
+                    }).catch((result) => {
+                        var messages = this.flattenValidation(result.data);
+                        reject(messages);
+                    });
+            });
+        }
+
+        public getUserById(userId: string) {
+            //let data = { userId: userId };
+            return this.$q((resolve, reject) => {
+                this.$http.get('/api/account/getUserById/' + userId, null)
+                    .then((result) => {
+                        resolve(result.data);
+                    }).catch((result) => {
+                        var messages = this.flattenValidation(result.data);
+                        reject(messages);
+                    });
+            });
+        }
+
         constructor
         (
             private $q: ng.IQService,
