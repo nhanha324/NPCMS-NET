@@ -135,10 +135,10 @@ namespace NPCMS_Net.Services {
             return messages;
         }
 
-
-        public deleteUser(usertodelete) {
+        //From here functions for NPCMS project
+        public deleteUser(useridtodelete) {
             return this.$q((resolve, reject) => {
-                this.$http.delete('/api/account/deleteuser', usertodelete)
+                this.$http.delete('/api/account/deleteuser/'+useridtodelete)
                     .then((result) => {
                         resolve(result);
                     })
@@ -149,6 +149,18 @@ namespace NPCMS_Net.Services {
             });
         }
 
+        public updateUser(usertoupdate) {
+            return this.$q((resolve, reject) => {
+                this.$http.post('/api/account/updateuser/', usertoupdate)
+                    .then((result) => {
+                        resolve(result);
+                    })
+                    .catch((result) => {
+                        var messages = this.flattenValidation(result.data);
+                        reject(messages);
+                    });
+            });
+        }
 
         public getAllUsers() {
             return this.$q((resolve, reject) => {
@@ -163,7 +175,7 @@ namespace NPCMS_Net.Services {
         }
 
         public getUserById(userId: string) {
-            //let data = { userId: userId };
+            
             return this.$q((resolve, reject) => {
                 this.$http.get('/api/account/getUserById/' + userId, null)
                     .then((result) => {

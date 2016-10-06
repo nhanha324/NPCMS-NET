@@ -44,9 +44,9 @@ namespace NPCMS_Net {
                 controllerAs: 'controller'
             })
             .state('edituser', {
-                url: '/admin/users/edituser',
+                url: '/admin/users/edituser/:userid',
                 templateUrl: '/ngApp/views/User/edituser.html',
-                controller: NPCMS_Net.Controllers.RegisterController,
+                controller: NPCMS_Net.Controllers.UpdateUserController,
                 controllerAs: 'controller'
             })
             .state('roles', {

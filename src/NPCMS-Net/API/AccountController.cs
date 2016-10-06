@@ -455,6 +455,7 @@ namespace NPCMS_Net.Controllers
                 return View(model);
             }
         }
+        //From here changes related to the project NPCMS 
 
         //Part of Solution Issue #3 - NPCMS 10/03/2016
         // GET: /Account/GetAllUsers
@@ -469,36 +470,36 @@ namespace NPCMS_Net.Controllers
         // GET: /Account/GetUser
         [HttpGet("GetUserById/{userId}")]
         [AllowAnonymous]
-        public ApplicationUser GetUserById(string userId)
+        public Task<ApplicationUser> GetUserById(string userId)
         {
-
-            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+           var user = _userManager.FindByIdAsync(userId);
+            //var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
 
             return user;
 
         }
 
-
-        // POST: /Account/Register
-         [HttpDelete("DeleteUser")]
-         [AllowAnonymous]
-         public async Task<IActionResult> DeleteUser([FromBody]ApplicationUser usertodelete)
-         {
+        //Part of Solution Issue #3 - NPCMS 10/04/2016
+        //[HttpDelete("DeleteUser/{useridtodelete}")]
+        [HttpDelete("DeleteUser/{useridtodelete}")]
+        [AllowAnonymous]
+         public async Task<IActionResult> DeleteUser(string useridtodelete)
+        {
              if (ModelState.IsValid)
              {
-                 var user = await GetUser(usertodelete.UserName);
-
-                 if (user == null)
+                 //var user = GetUserById(useridtodelete);
+                 Task<ApplicationUser> user = GetUserById(useridtodelete);
+                if (user == null)
                  {
 
                      this.ModelState.AddModelError(null, "User do not exists");
                      return BadRequest(this.ModelState);
                  }
 
-                 var result = await _userManager.DeleteAsync(usertodelete);
+                 var result = await _userManager.DeleteAsync(user.Result);
                  if (result.Succeeded)
                  {
-                     return Ok(usertodelete);
+                     return Ok(user);
                  }
                  AddErrors(result);
              } 
@@ -506,7 +507,30 @@ namespace NPCMS_Net.Controllers
              // If we got this far, something failed
              return BadRequest(this.ModelState);
          }
-         
+
+        //Part of Solution Issue #3 - NPCMS 10/05/2016
+        [HttpPost("UpdateUser")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateUser([FromBody]ApplicationUser usertoupdate)
+        {
+            if (ModelState.IsValid)
+            {
+                Task<ApplicationUser> user = GetUserById(usertoupdate.Id);
+                user.Result.UserName = usertoupdate.Email;
+                user.Result.Email = usertoupdate.Email;
+
+                var result = await _userManager.UpdateAsync(user.Result);
+                if (result.Succeeded)
+                {
+                    return Ok(usertoupdate);
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed
+            return BadRequest(this.ModelState);
+        }
+
 
 
         #region Helpers

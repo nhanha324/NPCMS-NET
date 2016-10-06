@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!--link href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />-->
-    <link href="~/css/bootstrapcerulean.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/bootstrapcerulean.css" rel="stylesheet" />
     <base href="/" />
 </head>
 <body ng-controller="AccountController as account">
@@ -26,7 +27,6 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                         <ul class="nav navbar-nav">
                             <li class="active"><a ui-sref="home">Home <span class="sr-only">(current)</span></a></li>
-                            <li><a ui-sref="users">Users </a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pages <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -64,6 +64,11 @@
     <script src="/bower_components/angular-touch/angular-touch.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+   
+    <script src="~/bower_components/jquery/dist/jquery.js"></script>
+    <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+   
+
 
     <!-- App Files-->
     <script src="/ngapp/app.js"></script>
