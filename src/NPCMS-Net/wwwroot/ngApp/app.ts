@@ -15,9 +15,27 @@ namespace NPCMS_Net {
             })
             .state('pages', {
                 url: '/admin/pages',
-                templateUrl: '/ngApp/views/page.html',
+                templateUrl: '/ngApp/views/Page/page.html',
                 controller: NPCMS_Net.Controllers.PageController,
                 controllerAs: 'controller'
+            })
+            .state('addpage', {
+                url: '/admin/pages/addpage',
+                templateUrl: '/ngApp/views/Page/pagedetail.html',
+                controller: NPCMS_Net.Controllers.PageController,
+                controllerAs: 'controller',
+                params: {
+                    pageTitle: "Adding Page"
+                }
+            })
+            .state('editpage', {
+                url: '/admin/pages/editpage',
+                templateUrl: '/ngApp/views/Page/pagedetail.html',
+                controller: NPCMS_Net.Controllers.EditPageController,
+                controllerAs: 'controller',
+                params: {
+                    pageTitle: "Editing Page",
+                    id: null}
             })
             .state('layouts', {
                 url: '/admin/pages/layouts',
@@ -109,7 +127,5 @@ namespace NPCMS_Net {
     angular.module('NPCMS_Net').config(function ($httpProvider) {
         $httpProvider.interceptors.push('authInterceptor');
     });
-
-    
 
 }
