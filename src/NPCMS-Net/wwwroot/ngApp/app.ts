@@ -52,17 +52,17 @@ namespace NPCMS_Net {
             .state('users', {
                 url: '/admin/users',
                 templateUrl: '/ngApp/views/User/user.html',
-                controller: NPCMS_Net.Controllers.RegisterController,
+                controller: NPCMS_Net.Controllers.userController,
                 controllerAs: 'controller'
             })
             .state('adduser', {
                 url: '/admin/users/adduser',
                 templateUrl: '/ngApp/views/User/adduser.html',
-                controller: NPCMS_Net.Controllers.RegisterController,
+                controller: NPCMS_Net.Controllers.userController,
                 controllerAs: 'controller'
             })
             .state('edituser', {
-                url: '/admin/users/edituser/:userid',
+                url: '/admin/users/edituser/:userName',
                 templateUrl: '/ngApp/views/User/edituser.html',
                 controller: NPCMS_Net.Controllers.UpdateUserController,
                 controllerAs: 'controller'

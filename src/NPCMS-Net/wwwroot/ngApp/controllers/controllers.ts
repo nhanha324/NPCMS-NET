@@ -18,16 +18,7 @@ namespace NPCMS_Net.Controllers {
             console.log(this.npcmsPages);
         }
 
-        public goAddPage() {
-            
-            this.$state.go('addpage');
-        }
-
-        public goEditPage(id: number) {
-
-            this.$state.go('editpage', { id: id });
-        }
-
+        
         public goDeletePage(id) {
             
             this.PageResource.get({ id: id }).$promise.then((data) => {

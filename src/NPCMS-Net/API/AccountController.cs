@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using NPCMS_Net.Models;
 using NPCMS_Net.Services;
 using NPCMS_Net.ViewModels.Account;
+using NPCMS_Net.ViewModels;
 
 namespace NPCMS_Net.Controllers
 {
@@ -460,36 +461,43 @@ namespace NPCMS_Net.Controllers
         //Part of Solution Issue #3 - NPCMS 10/03/2016
         // GET: /Account/GetAllUsers
         [HttpGet("GetAllUsers")]
-        [AllowAnonymous]
-        public IEnumerable<ApplicationUser> GetAllUsers()
+        [Authorize(Policy = "AdminOnly")]
+        public IEnumerable<UserDataViewModel> GetAllUsers()
         {
-            return _userManager.Users.ToList();
+             
+            var user = _userManager.Users.Select(u => new UserDataViewModel { Email = u.Email, UserName = u.Email }).ToList( );
+            return user;
         }
 
-        //Part of Solution Issue #3 - NPCMS 10/04/2016
-        // GET: /Account/GetUser
-        [HttpGet("GetUserById/{userId}")]
+        //Part of Solution Issue #3 - NPCMS 10/03/2016
+        // Fixed 10/12/2016 changing the type of parameter
+        [HttpGet("GetUserByName/{username}")]
         [AllowAnonymous]
-        public Task<ApplicationUser> GetUserById(string userId)
+        public UserDataViewModel GetUserByName(string userName)
         {
-           var user = _userManager.FindByIdAsync(userId);
-            //var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
 
-            return user;
+            var user = GetUser(userName);
 
+            UserDataViewModel userToReturn = new UserDataViewModel();
+
+            userToReturn.UserName = user.Result.UserName;
+            userToReturn.Email = user.Result.UserName;
+
+            return userToReturn;
         }
 
         //Part of Solution Issue #3 - NPCMS 10/04/2016
         //[HttpDelete("DeleteUser/{useridtodelete}")]
-        [HttpDelete("DeleteUser/{useridtodelete}")]
-        [AllowAnonymous]
-         public async Task<IActionResult> DeleteUser(string useridtodelete)
+        [HttpDelete("DeleteUser/{usernametodelete}")]
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> DeleteUser(string usernametodelete)
         {
              if (ModelState.IsValid)
              {
-                 //var user = GetUserById(useridtodelete);
-                 Task<ApplicationUser> user = GetUserById(useridtodelete);
-                if (user == null)
+                //var user = GetUserById(useridtodelete);
+                var user = _userManager.FindByNameAsync(usernametodelete);
+                //Task<ApplicationUser> user = GetDataUserById(usernametodelete);
+                if (user.Result == null)
                  {
 
                      this.ModelState.AddModelError(null, "User do not exists");
@@ -499,7 +507,7 @@ namespace NPCMS_Net.Controllers
                  var result = await _userManager.DeleteAsync(user.Result);
                  if (result.Succeeded)
                  {
-                     return Ok(user);
+                     return Ok();
                  }
                  AddErrors(result);
              } 
@@ -509,20 +517,22 @@ namespace NPCMS_Net.Controllers
          }
 
         //Part of Solution Issue #3 - NPCMS 10/05/2016
+        // The parameter usertoupdate contain 2 values: usertoupdate.Email represent the value changed and usertoupdate.UserName represent the original(previous) value
         [HttpPost("UpdateUser")]
-        [AllowAnonymous]
-        public async Task<IActionResult> UpdateUser([FromBody]ApplicationUser usertoupdate)
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> UpdateUser([FromBody]UserDataViewModel usertoupdate)
         {
             if (ModelState.IsValid)
-            {
-                Task<ApplicationUser> user = GetUserById(usertoupdate.Id);
-                user.Result.UserName = usertoupdate.Email;
-                user.Result.Email = usertoupdate.Email;
+            { 
+                var userToUpdate = _userManager.FindByNameAsync(usertoupdate.UserName);
 
-                var result = await _userManager.UpdateAsync(user.Result);
+                userToUpdate.Result.UserName = usertoupdate.Email;
+                userToUpdate.Result.Email = usertoupdate.Email;
+
+                var result = await _userManager.UpdateAsync(userToUpdate.Result);
                 if (result.Succeeded)
                 {
-                    return Ok(usertoupdate);
+                    return Ok();
                 }
                 AddErrors(result);
             }
@@ -530,8 +540,6 @@ namespace NPCMS_Net.Controllers
             // If we got this far, something failed
             return BadRequest(this.ModelState);
         }
-
-
 
         #region Helpers
 

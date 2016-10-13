@@ -8,7 +8,7 @@
 <div>
     <h3>List of Pages</h3>
 
-    Need create a new Page? <a ng-click="controller.goAddPage()" class="btn-primary btn btn-sm"><span class="glyphicon glyphicon-plus"></span> New</a>
+    Need create a new Page? <a ui-sref="addpage" class="btn-primary btn btn-sm"><span class="glyphicon glyphicon-plus"></span> New</a>
 
 </div>
 
@@ -32,7 +32,7 @@
        
             <td>{{page.title}}</td>
             <td>
-                <a ng-click="controller.goEditPage(page.id)" class="btn btn-xs btn-success"> <span class="glyphicon glyphicon-pencil"></span></a>
+                <a ui-sref="editpage({id:page.id})" class="btn btn-xs btn-success"> <span class="glyphicon glyphicon-pencil"></span></a>
                 <a ng-hide="page.title=='Home' || page.title=='Error' ||page.title=='NotFound'"  ng-click="controller.goDeletePage(page.id)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>

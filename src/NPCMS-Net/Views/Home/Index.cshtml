@@ -10,7 +10,9 @@
 </head>
 <body ng-controller="AccountController as account">
     <div class="container">
-
+        <div ng-show="account.isLoggedIn()">
+            Hello: {{account.getUserName()}}
+        </div>
             <nav class="navbar navbar-inverse ">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -36,7 +38,8 @@
                             </li>
                             <li><a ui-sref="things">Things</a></li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Users <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                                   role="button" aria-expanded="false">Users <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a ui-sref="users">Users </a></li>
                                     <li><a ui-sref="roles">Roles </a></li>
@@ -45,8 +48,9 @@
                             <li><a ui-sref="extensions">Extensions </a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <!--li><a ui-sref="register"><span class="glyphicon glyphicon-user"></span> Register</a></!--li> -->
-                            <li><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <!--li><a ui-sref="register"><span class="glyphicon glyphicon-user"></span> Register</a></!--> 
+                            <li><a ui-sref="home" ng-click="account.logout()" ng-show="account.isLoggedIn()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            <li><a ui-sref="login" ng-show="!account.isLoggedIn()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -71,9 +75,11 @@
 
 
     <!-- App Files-->
-    <script src="/ngapp/app.js"></script>
+    <script src="/ngapp/app.js"></script>   
     <script src="/ngapp/controllers/controllers.js"></script>
+    <script src="~/ngapp/controllers/userController.js"></script>
     <script src="/ngapp/services/services.js"></script>
+    
 
 
     <!-- Security -->

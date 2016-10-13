@@ -53,29 +53,22 @@ namespace NPCMS_Net.Controllers {
     export class RegisterController {
         public registerUser;
 
-        public registredUsers;
+       // public registredUsers;
         public validationMessages;
 
         public register() {
             this.accountService.register(this.registerUser).then(() => {
-                this.clearForm(); 
+                this.$location.path('/');
             }).catch((results) => {
                 this.validationMessages = results;
             });
         }
 
 
-        //Part of solution Issue #3 - NPCMS Project 10/03/2016
-        public goAddUser() {
+        // Part of solution Issue #3 - NPCMS Project 10/03/2016
+        // Fixed at 10/11/2016
 
-            this.$state.go('adduser');
-        }
-
-        public goEditUser(id: string) {
-            this.$state.go('edituser', { userid: id });
-        }
-
-        public goDeleteUser(id: string) {
+        /*public goDeleteUser(id: string) {
 
             this.accountService.getUserById(id).then((data) => {
                 this.registerUser = data
@@ -113,27 +106,26 @@ namespace NPCMS_Net.Controllers {
 
         //Part of solution Issue #3 - NPCMS Project 10/03/2016
         public getAllUsers() {
-
+            
             this.accountService.getAllUsers().then((result) => {
+                
                 this.registredUsers = result;
             }).catch((results) => {
                 this.validationMessages = results;
             });
 
-        }
+        }*/
 
-        constructor(private $resource: angular.resource.IResourceService, private accountService: NPCMS_Net.Services.AccountService,
-            private $state: ng.ui.IStateService, private $location: ng.ILocationService,
-            private $uibModal: angular.ui.bootstrap.IModalService) {
+        constructor(private accountService: NPCMS_Net.Services.AccountService,private $location: ng.ILocationService) {
 
-            this.getAllUsers();
+           // this.getAllUsers();
         }
 
 
     }
 
     //Controller for Modal Delete Confirmation
-    class DeleteUserController {
+   /* class DeleteUserController {
 
         public resultData;
 
@@ -158,7 +150,9 @@ namespace NPCMS_Net.Controllers {
     }
 
     angular.module('NPCMS_Net').controller('DeleteUserController', DeleteUserController);
+    */
 
+    /*
     export class UpdateUserController {
         public registerUser;
         public validationMessages;
@@ -192,12 +186,12 @@ namespace NPCMS_Net.Controllers {
             this.getUser($stateParams['userid']);
         }
     }
-
+    */
 
     export class ExternalRegisterController {
         public registerUser;
         public validationMessages;
-
+         
         public register() {
             this.accountService.registerExternal(this.registerUser.email)
                 .then((result) => {
