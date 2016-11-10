@@ -15,6 +15,8 @@ namespace NPCMS_Net.Data
         {
         }
 
+        
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -22,5 +24,7 @@ namespace NPCMS_Net.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<NPCMS_Page> NPCMS_Pages { get; set; }
     }
 }

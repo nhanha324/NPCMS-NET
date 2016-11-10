@@ -135,6 +135,7 @@ namespace NPCMS_Net.Services {
             return messages;
         }
 
+        
         constructor
         (
             private $q: ng.IQService,

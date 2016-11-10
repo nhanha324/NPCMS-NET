@@ -55,11 +55,14 @@ namespace NPCMS_Net
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            
 
-            
-                        // add security policies
-                        services.AddAuthorization(options =>
+            services.AddScoped<NPCMS_PageServices>();
+
+            services.AddScoped<IGenericRepository, GenericRepository>();
+
+
+            // add security policies
+            services.AddAuthorization(options =>
                         {
                             options.AddPolicy("AdminOnly", policy => policy.RequireClaim("IsAdmin"));
                         });

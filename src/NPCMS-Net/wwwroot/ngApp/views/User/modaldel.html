@@ -1,0 +1,12 @@
+﻿<div class="modal-header">
+    <button ng-click="modal.saidNo()" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Confirm To Delete</h4>
+</div>
+<div class="modal-body">
+    <p>Are you sure that you want to delete the user?:</p>
+    <strong>{{modal.user.userName}}</strong>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="modal.saidNo()" data-dismiss="modal">No</button>
+    <button type="button" class="btn btn-danger" ng-click="modal.saidYes()">Yes</button>
+</div>
