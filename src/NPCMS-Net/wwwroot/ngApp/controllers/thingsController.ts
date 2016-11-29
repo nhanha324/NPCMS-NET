@@ -33,8 +33,6 @@
             thingsService.getThing($stateParams['id']).then(
                 (data) => {
                     this.thingToEdit = data
-                    console.log("ThingsToEditController", data)
-                    console.log("this.thingToEdit", this.thingToEdit)
                 }
             );
         }

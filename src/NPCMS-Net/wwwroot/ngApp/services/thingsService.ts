@@ -10,7 +10,7 @@
         }
 
         public listThings() {
-            console.log();
+            ();
             return this.ThingsResource.query();
         }
 
