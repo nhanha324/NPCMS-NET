@@ -22,10 +22,25 @@ textarea {
     z-index: 10 !important;
 }
 
-    .carousel-caption p {
-        font-size: 20px;
-        line-height: 1.4;
-    }
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+h1.things.lead {
+    margin: 0 0 5% 0;
+}
+
+form.things {
+    min-width: 80%;
+    margin: 0 auto;
+}
+
+form.things input, form.things label {
+    min-width: 80%;
+    margin: 0 0 1% 0;
+
+}
 
 @media (min-width: 768px) {
     .carousel-caption {

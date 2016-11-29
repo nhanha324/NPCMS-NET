@@ -47,6 +47,16 @@ namespace NPCMS_Net.Data
                 await userManager.CreateAsync(mike, "Secret123!");
             }
 
+            //Sample Things
+            if (!context.Things.Any())
+            {
+                context.Things.AddRange(
+                    new Thing { Name = "Star Wars", Properties = 1 },
+                    new Thing { Name = "Memento", Properties = 2 },
+                    new Thing { Name = "King Kong", Properties = 3 }
+                );
+                context.SaveChanges();
+            }
 
         }
 

@@ -144,10 +144,6 @@ namespace NPCMS_Net.Controllers {
         public message = 'Layouts';
     }
 
-    export class ThingController {
-        public message = 'Things';
-    }
-
     export class UserController {
         public message = 'Users';
 

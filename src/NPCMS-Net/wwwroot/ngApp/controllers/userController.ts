@@ -133,7 +133,7 @@ export class UpdateUserController {
 
 
     constructor(private usersService: NPCMS_Net.Services.UsersService, private $state: ng.ui.IStateService,
-        private $location: ng.ILocationService, private $stateParams: ng.ui.IStateParamsService, ) {
+        private $location: ng.ILocationService, private $stateParams: ng.ui.IStateParamsService ) {
         this.getUser($stateParams['userName']);
     }
 }

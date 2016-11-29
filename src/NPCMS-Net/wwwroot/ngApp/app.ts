@@ -45,8 +45,8 @@ namespace NPCMS_Net {
             })
             .state('things', {
                 url: '/admin/things',
-                templateUrl: '/ngApp/views/thing.html',
-                controller: NPCMS_Net.Controllers.ThingController,
+                templateUrl: '/ngApp/views/Things/list.html',
+                controller: NPCMS_Net.Controllers.ThingsListController,
                 controllerAs: 'controller'
             })
             .state('users', {
@@ -89,6 +89,24 @@ namespace NPCMS_Net {
                 url: '/register',
                 templateUrl: '/ngApp/views/register.html',
                 controller: NPCMS_Net.Controllers.RegisterController,
+                controllerAs: 'controller'
+            })
+            .state('ThingsAdd', {
+                url: '/admin/things/add',
+                templateUrl: '/ngApp/views/Things/add.html',
+                controller: NPCMS_Net.Controllers.ThingsAddController,
+                controllerAs: 'controller'
+            })
+            .state('ThingsEdit', {
+                url: '/admin/things/edit/:id',
+                templateUrl: '/ngApp/views/Things/edit.html',
+                controller: NPCMS_Net.Controllers.ThingsEditController,
+                controllerAs: 'controller'
+            })
+            .state('ThingsDelete', {
+                url: '/admin/things/delete/:id',
+                templateUrl: '/ngApp/views/Things/delete.html',
+                controller: NPCMS_Net.Controllers.ThingsDeleteController,
                 controllerAs: 'controller'
             })
             .state('notFound', {

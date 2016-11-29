@@ -1,0 +1,23 @@
+﻿<div class="row">
+    <div class="col-md-6 test-left"><h1 class="things lead"> {{controller.message}}</h1></div>
+    <div class="col-md-6 text-right"><a class="btn btn-success" ui-sref="ThingsAdd"> <i class="glyphicon glyphicon-plus"></i> &nbsp; Add Thing</a></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-md-4" ng-repeat="thing in controller.things">
+        <div class="thumbnail">
+            <img src="http://placehold.it/350x350">
+            <div class="caption">
+                <h3>{{thing.name}}</h3>
+                <dl>
+                    <dt>Properties</dt>
+                    <dd>{{thing.properties}}</dd>
+                </dl>
+                <p>
+                    <a class="btn btn-primary" ui-sref="ThingsEdit({id: thing.thingId })"><i class="glyphicon glyphicon-pencil"></i>&nbsp; Edit</a>
+                    <a class="btn btn-danger" ui-sref="ThingsDelete({id: thing.thingId })"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

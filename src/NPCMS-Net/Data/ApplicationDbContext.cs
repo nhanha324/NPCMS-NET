@@ -26,5 +26,6 @@ namespace NPCMS_Net.Data
         }
 
         public DbSet<NPCMS_Page> NPCMS_Pages { get; set; }
+        public DbSet<Thing> Things { get; set; }
     }
 }
